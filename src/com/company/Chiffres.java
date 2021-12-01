@@ -39,10 +39,9 @@ public class Chiffres {
      }
 
     protected static void getNumber( ArrayList<Integer> list, List output){
-        Random random = new Random();
         int min = 1;
         int max = list.size();
-        int index = random.nextInt(max - min + 1) + min;
+        int index = Main.random.nextInt(max - min + 1) + min;
         int i=0;
         int result = 0;
         while(i < 1){
@@ -56,10 +55,9 @@ public class Chiffres {
         output.add(result);
     }
     protected static void computerChoice(Player player, ArrayList rang1, ArrayList rang2, ArrayList rang3, List result) {
-        Random random = new Random();
         int min = 1;
         int max = 3;
-        int listChoice = random.nextInt(max - min + 1) + min;
+        int listChoice = Main.random.nextInt(max - min + 1) + min;
         switch (listChoice) {
             case 1:
                 getNumber(rang1, result);

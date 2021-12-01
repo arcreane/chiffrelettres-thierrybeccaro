@@ -1,11 +1,14 @@
 package com.company;
 
+import java.io.IOException;
 import java.util.InputMismatchException;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
 
     public static Scanner sc = new Scanner(System.in);
+    public static Random random = new Random();
 
     public static void DisplayMenu(){
         System.out.println("Bienvenue sur notre super jeu ^^");
@@ -34,6 +37,13 @@ public class Main {
     }
 
     public static void main(String[] args) {
+//        try{
+            Lettres test = new Lettres();
+//            test.getDICO();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+        test.JeuLettre1V1();
 //        DisplayMenu();
     }
 }
