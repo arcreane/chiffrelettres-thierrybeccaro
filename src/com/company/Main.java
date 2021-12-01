@@ -9,7 +9,6 @@ public class Main {
 
     public static void DisplayMenu(){
         System.out.println("Bienvenue sur notre super jeu ^^");
-        Timer.DisplayTimer(60);
         Scanner sc = new Scanner(System.in);
 
         boolean repeat = true;

@@ -16,4 +16,14 @@ public class Player {
         return this.score;
     }
 
+    /**
+     * Player has a determined time to answer.
+     */
+    public static String getPlayerAnswer(){
+        Timer.DisplayTimer("Temps pour entrer votre réponse: ", 30);
+        String answer = Main.sc.nextLine();
+        Main.sc.nextLine();
+        return answer;
+    }
+
 }
