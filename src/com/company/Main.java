@@ -33,17 +33,17 @@ public class Main {
                 sc.nextLine();
             }
         }
-
     }
 
     public static void main(String[] args) {
 //        try{
-            Lettres test = new Lettres();
+Lettres test = new Lettres();
 //            test.getDICO();
 //        } catch (IOException e) {
 //            e.printStackTrace();
 //        }
         test.JeuLettre1V1();
-//        DisplayMenu();
+        //        DisplayMenu();
+
     }
 }
