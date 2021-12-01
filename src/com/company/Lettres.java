@@ -1,7 +1,5 @@
 package com.company;
 
-import org.w3c.dom.ls.LSOutput;
-
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -42,11 +40,11 @@ public class Lettres {
                 consonnes.add(value);
             }
         }
-        if (choixJoueur.equals("consonne")){
+        if (choixJoueur.equals("C")){
             int value = Main.random.nextInt(20);
             return consonnes.get(value);
         }
-        else if (choixJoueur.equals("voyelle")){
+        else if (choixJoueur.equals("V")){
             int value = Main.random.nextInt(6);
             return voyelles.get(value);
         }
@@ -64,7 +62,7 @@ public class Lettres {
             String value = getLettre(rep);
             if (value.equals("mauvaise entrée")){
                 i--;
-                System.out.println("veuillez marquer consonne ou voyelle");
+                System.out.println("veuillez marquer C ou V");
                 continue;
             }
             else{
@@ -76,7 +74,7 @@ public class Lettres {
             value = getLettre(rep);
             if (value.equals("mauvaise entrée")){
                 i--;
-                System.out.println("veuillez marquer consonne ou voyelle");
+                System.out.println("veuillez marquer C ou V");
                 continue;
             }
             else{
