@@ -1,5 +1,7 @@
 package com.company;
 
+import org.w3c.dom.ls.LSOutput;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -7,7 +9,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+
 
 public class Lettres {
 
@@ -27,19 +29,58 @@ public class Lettres {
             dico.add(ligne);
         lecteurAvecBuffer.close();
     }
-    public String GetLettre(){
+    public String getLettre(String choixJoueur){
         String lettre= null;
         List<String> voyelles = new ArrayList<>();
         List<String> consonnes = new ArrayList<>();
 
-        Random rand = new Random();
-        char c = (char)(rand.nextInt(26) + 97);
+        for (char c = 'a'; c <= 'z';c++) {
+            String value = String.valueOf(c);
+            if (value.equals("a") || value.equals("e") || value.equals("i") || value.equals("o") || value.equals("u") || value.equals("y")) {
+                voyelles.add(value);
+            } else {
+                consonnes.add(value);
+            }
+        }
+        if (choixJoueur.equals("consonne")){
+            int value = Main.random.nextInt(20);
+            return consonnes.get(value);
+        }
+        else if (choixJoueur.equals("voyelle")){
+            int value = Main.random.nextInt(6);
+            return voyelles.get(value);
+        }
+        else{
+            return "mauvaise entrée";
+        }
 
-
-        return lettre;
     }
-    public void JeuLettre(){
+    public void JeuLettre1V1(){
         System.out.println("bienvenue sur le Mot le plus long");
+        List<String> Lettres = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            System.out.println("Joueur 1 voulez vous une consonne ou une voyelle ?");
+            String rep = Main.sc.nextLine();
+            String value = getLettre(rep);
+            if (value.equals("mauvaise entrée")){
+                i--;
+                continue;
+            }
+            else{
+                Lettres.add(value);
+            }
+            System.out.println("Joueur 2 voulez vous une consonne ou une voyelle ?");
+            rep = Main.sc.nextLine();
+            value = getLettre(rep);
+            if (value.equals("mauvaise entrée")){
+                i--;
+                continue;
+            }
+            else{
+                Lettres.add(value);
+            }
+        }
+        System.out.println(Lettres);
 
     }
 }
