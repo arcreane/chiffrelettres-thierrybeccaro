@@ -1,5 +1,9 @@
 package com.company;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 public class Player {
     String name;
     int score = 0;
@@ -16,14 +20,5 @@ public class Player {
         return this.score;
     }
 
-    /**
-     * Player has a determined time to answer.
-     */
-    public static String getPlayerAnswer(){
-        Timer.DisplayTimer("Temps pour entrer votre réponse: ", 30);
-        String answer = Main.sc.nextLine();
-        Main.sc.nextLine();
-        return answer;
-    }
 
 }
