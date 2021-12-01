@@ -64,20 +64,24 @@ public class Lettres {
             String value = getLettre(rep);
             if (value.equals("mauvaise entrée")){
                 i--;
+                System.out.println("veuillez marquer consonne ou voyelle");
                 continue;
             }
             else{
                 Lettres.add(value);
+                System.out.println("vous avez obtenu la lettre: " + value);
             }
             System.out.println("Joueur 2 voulez vous une consonne ou une voyelle ?");
             rep = Main.sc.nextLine();
             value = getLettre(rep);
             if (value.equals("mauvaise entrée")){
                 i--;
+                System.out.println("veuillez marquer consonne ou voyelle");
                 continue;
             }
             else{
                 Lettres.add(value);
+                System.out.println("vous avez obtenu la lettre: " + value);
             }
         }
         System.out.println(Lettres);
