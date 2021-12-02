@@ -16,14 +16,18 @@ public class Main {
 
         boolean repeat = true;
         while (repeat){
+            Game.waitAWhile(2);
+            clearScreen();
             try{
-                System.out.println("1) Mode 1 joueur (contre ia) \n2) Mode 2 joueurs \n3) Quitter");
-                int choix = sc.nextInt();
-                switch (choix) {
+
+                System.out.println("1) Mode 1 joueur (contre ia) \n2) Mode 2 joueurs \n3) Scores \n4) Quitter");
+                int choice = sc.nextInt();
+                switch (choice) {
 
                     case 1 -> StartGame.playerVsIa();
                     case 2 -> StartGame.playerVsPlayer();
-                    case 3 -> repeat = false;
+                    case 3 -> System.out.println("Voici les Scores");
+                    case 4 -> repeat = false;
                     default -> System.err.println ( "Unrecognized option" );
 
                 }
@@ -36,7 +40,16 @@ public class Main {
 
     }
 
+    /**
+     * Clear Terminal
+     */
+    public static void clearScreen() {
+        System.out.print("\033[H\033[2J");
+    }
+
     public static void main(String[] args) {
         DisplayMenu();
     }
+
+
 }

@@ -36,11 +36,14 @@ public class Player {
             }
             if (br.ready()){
                 answer = br.readLine();
+                System.out.printf("Merci. Votre réponse est : %s\n", answer);
+                Game.waitAWhile(2);
+                return answer;
             }
             time--;
         }
-        System.out.printf("Le temps imparti est écoulé. Votre réponse est : %s", answer);
-        //
+        System.out.printf("Le temps imparti est écoulé. Votre réponse est : %s\n", answer);
+        Game.waitAWhile(2);
         return answer;
     }
 

@@ -55,6 +55,7 @@ public class Lettres {
         }
     }
     public static void JeuLettre1V1() throws IOException {
+        Main.clearScreen();
         System.out.println("Bienvenue sur le Mot le plus long");
         List<String> Lettres = new ArrayList<>();
         try {
@@ -93,6 +94,7 @@ public class Lettres {
     }
 
     private static void extracted(List<String> Lettres) throws IOException {
+        Main.clearScreen();
         System.out.println("Voici la liste des lettres disponibles pour la creation du mot");
         System.out.println(Lettres);
         Timer.DisplayTimer("Il vous reste", 60);
