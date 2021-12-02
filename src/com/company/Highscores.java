@@ -1,31 +1,32 @@
 package com.company;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.*;
 
 public class Highscores {
 
-
-    static ArrayList<ArrayList<String>> scoresBoard = new ArrayList<>();
+    static public Hashtable<String, ArrayList<String>> scoresBoard = new Hashtable<String, ArrayList<String>>();
 
     public static void writeNamesAndScores(Player Player1, Player Player2){
-        Date date = new Date();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-        int index = scoresBoard.size();
-        scoresBoard.get(index).add(formatter.format(date));
-        scoresBoard.get(index).add(Player1.name + " VS " + Player2.name);
-        scoresBoard.get(index).add(Player1.score + " " + Player2.score);
-
+        String key = Player1.name + " VS "+Player2.name;
+        ArrayList<String> values = new ArrayList<String>();
+        if(scoresBoard.containsKey(key)){
+            StringBuilder iValues = new StringBuilder(String.valueOf(scoresBoard.get(key)));
+            iValues.delete(0, 1);
+            iValues.delete(7, 8);
+            values.add(String.valueOf(iValues));
+        }
+        values.add(Player1.score+" - "+Player2.score);
+        scoresBoard.put(key, values);
     }
 
     public static void displayHighScores() {
-        String level = "";
-        int tabIndex = 0;
-        System.out.println("****** SCORES ******");
-        printScores(tabIndex, level);
+        System.out.println("*************** SCORES **************");
+        printScores();
     }
 
-    public static void printScores(int index, String level){
-        System.out.println("Names: " + scoresBoard.get(0) + " " + scoresBoard.get(1)+" " + scoresBoard.get(2));
+    public static void printScores() {
+        scoresBoard.forEach(
+                (k, v) -> System.out.println("Players : " + k + "\t Scores : " + v));
+    }
 }

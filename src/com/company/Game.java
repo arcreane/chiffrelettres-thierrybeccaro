@@ -3,7 +3,6 @@ package com.company;
 import java.io.IOException;
 
 
-
 public class Game {
 
     public static boolean badAnswer;
@@ -49,10 +48,13 @@ public class Game {
 
             System.out.println("Calcul des scores de chacun à la fin de la manche.");
         }
-        //Affichage des scores et du gagnant.
+        //Display of the winner and their Scores
         waitAWhile(2);
         Main.clearScreen();
-        System.out.println("Affichage des scores et du gagnant.");
+        //Faux gagant
+        String winner = "Titi";
+        System.out.printf("********* Et le gagnant est : %s *********\n", winner);
+        Highscores.displayHighScores();
         waitAWhile(3);
     }
 

@@ -27,7 +27,7 @@ public class Main {
 
                     case 1 -> StartGame.playerVsIa();
                     case 2 -> StartGame.playerVsPlayer();
-                    case 3 -> System.out.println("Voici les Scores");
+                    case 3 -> Highscores.displayHighScores();
                     case 4 -> repeat = false;
                     default -> System.err.println ( "Option non reconnue" );
 
