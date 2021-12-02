@@ -202,7 +202,7 @@ public class Lettres {
         return word;
     }
 
-    public boolean verifMot(String mot, List<String> lettres){
+    public static boolean verifMot(String mot, List<String> lettres){
         boolean verif = false;
 
         String word = mot;
