@@ -32,7 +32,7 @@ public class Game {
                 }
                 // Puis déroulé du jeu des Chiffres
                     Chiffres.nbrSelectVsComputer(StartGame.Player2, StartGame.computer);
-                }
+
 
             } else {
                 sayGameType("chiffres");
@@ -65,6 +65,7 @@ public class Game {
         }
         Highscores.displayHighScores();
     }
+
 
     private static void sayGameType(String roundType){
         System.out.printf("Nous allons commencer par les %s\n", roundType);
