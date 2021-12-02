@@ -6,13 +6,14 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
+import java.util.TreeMap;
 
 
 public class Lettres {
     List<String> dico = new ArrayList<>();
+    List<String> motPossible = new ArrayList<>();
+
     public void getDICO() throws IOException {
         BufferedReader lecteurAvecBuffer = null;
         String ligne;
@@ -57,6 +58,7 @@ public class Lettres {
     public void JeuLettre1V1(){
         System.out.println("Bienvenue sur le Mot le plus long");
         List<String> Lettres = new ArrayList<>();
+        List<String> build = new ArrayList<>();
         try {
             getDICO();
         } catch (IOException e) {
@@ -88,8 +90,11 @@ public class Lettres {
                 System.out.println("Vous avez obtenu la lettre: " + value);
             }
         }
+            algorythmeLettre(Lettres, dico);
+        String mot = motLePlusLong(motPossible);
+        System.out.println(mot);
 
-        extracted(Lettres);
+//        extracted(Lettres);
     }
 
     private void extracted(List<String> Lettres) {
@@ -139,6 +144,43 @@ public class Lettres {
                 System.out.println("Bravo joueur 2 vous gagnez cette manche, contrairement au joueur 1 votre mot existe !");
             }
         }
+
+    }
+    private void algorythmeLettre(List<String> lettre,List<String> dico){
+      String lettersCombined = String.join("",lettre);
+        for (int i = 0; i < dico.size(); i++) {
+            TreeMap<Character, Integer> freq = new TreeMap<Character, Integer>();
+
+            for (int j = 0; j < dico.get(i).length(); j++){
+                freq.put(dico.get(i).charAt(j), 0);
+            }
+
+            for (int j = 0; j < lettersCombined.length(); j++) {
+                if (freq.containsKey(lettersCombined.charAt(j)))
+                    freq.put(lettersCombined.charAt(j), freq.get(lettersCombined.charAt(j)) + 1);
+            }
+
+            boolean match = true;
+
+            for (int count : freq.values()) {
+                if (count <= 0) {
+                    match = false;
+                    break;
+                }
+            }
+            if (match){
+                motPossible.add(dico.get(i));
+            }
+        }
+    }
+    public String motLePlusLong(List<String> motPossible) {
+        String word = "";
+        for (String mot: motPossible) {
+            if (mot.length() <= 10 && mot.length() > word.length()){
+                word = mot;
+            }
+        }
+        return word;
     }
 }
 
