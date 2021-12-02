@@ -26,19 +26,24 @@ public class Player {
      */
     public static String getPlayerAnswer(int time) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String answer;
-        System.out.println("Entrez votre réponse");
-        while(time != 0){
+        String answer = "";
+        System.out.println("Entrez votre réponse: ");
+        while(time > 0){
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            if (br.ready()){
+                answer = br.readLine();
+                System.out.printf("Merci. Votre réponse est : %s\n", answer);
+                Game.waitAWhile(2);
+                return answer;
+            }
             time--;
         }
-        answer = br.readLine();
-        System.out.printf("Le temps imparti est écoulé. Votre réponse est : %s", answer);
-        br.close();
+        System.out.printf("Le temps imparti est écoulé. Votre réponse est : %s\n", answer);
+        Game.waitAWhile(2);
         return answer;
     }
 

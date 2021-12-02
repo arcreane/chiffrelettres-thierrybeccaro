@@ -16,34 +16,40 @@ public class Main {
 
         boolean repeat = true;
         while (repeat){
+            Game.waitAWhile(2);
+            clearScreen();
             try{
-                System.out.println("1) Mode 1 joueur (contre ia) \n2) Mode 2 joueurs \n3) Quitter");
-                int choix = sc.nextInt();
-                switch (choix) {
 
-                    case 1 -> System.out.println("Mode 1 joueur");
-                    case 2 -> System.out.println("Mode 2 joueurs");
-                    case 3 -> repeat = false;
+                System.out.println("1) Mode 1 joueur (contre ia) \n2) Mode 2 joueurs \n3) Scores \n4) Quitter");
+                int choice = sc.nextInt();
+                switch (choice) {
+
+                    case 1 -> StartGame.playerVsIa();
+                    case 2 -> StartGame.playerVsPlayer();
+                    case 3 -> System.out.println("Voici les Scores");
+                    case 4 -> repeat = false;
                     default -> System.err.println ( "Unrecognized option" );
 
                 }
             }
-            catch (InputMismatchException e){
+            catch (InputMismatchException | IOException e){
                 System.err.println("input non valide");
                 sc.nextLine();
             }
         }
+
+    }
+
+    /**
+     * Clear Terminal
+     */
+    public static void clearScreen() {
+        System.out.print("\033[H\033[2J");
     }
 
     public static void main(String[] args) {
-//        try{
-Lettres test = new Lettres();
-//            test.getDICO();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-        test.JeuLettre1V1();
-        //        DisplayMenu();
-
+        DisplayMenu();
     }
+
+
 }
