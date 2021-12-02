@@ -2,13 +2,13 @@ package com.company;
 
 import java.io.IOException;
 import java.util.InputMismatchException;
+import java.util.Random;
 import java.util.Scanner;
-import java.util.random.RandomGenerator;
 
 public class Main {
 
     public static Scanner sc = new Scanner(System.in);
-    public static RandomGenerator random;
+    public static Random random = new Random();
 
     public static void DisplayMenu(){
         System.out.println("Bienvenue sur notre super jeu ^^");
@@ -21,14 +21,14 @@ public class Main {
                 int choix = sc.nextInt();
                 switch (choix) {
 
-                    case 1 -> System.out.println("Mode 1 joueur");
-                    case 2 -> System.out.println("Mode 2 joueurs");
+                    case 1 -> StartGame.playerVsIa();
+                    case 2 -> StartGame.playerVsPlayer();
                     case 3 -> repeat = false;
                     default -> System.err.println ( "Unrecognized option" );
 
                 }
             }
-            catch (InputMismatchException e){
+            catch (InputMismatchException | IOException e){
                 System.err.println("input non valide");
                 sc.nextLine();
             }
@@ -36,8 +36,7 @@ public class Main {
 
     }
 
-    public static void main(String[] args) throws IOException {
-
-        //DisplayMenu();
+    public static void main(String[] args) {
+        DisplayMenu();
     }
 }

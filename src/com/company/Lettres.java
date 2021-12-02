@@ -12,8 +12,8 @@ import java.util.List;
 
 
 public class Lettres {
-    List<String> dico = new ArrayList<>();
-    public void getDICO() throws IOException {
+    static List<String> dico = new ArrayList<>();
+    public static void getDICO() throws IOException {
         BufferedReader lecteurAvecBuffer = null;
         String ligne;
         try
@@ -29,7 +29,7 @@ public class Lettres {
         lecteurAvecBuffer.close();
     }
 
-    public String getLettre(String choixJoueur){
+    public static String getLettre(String choixJoueur){
         String lettre= null;
         List<String> voyelles = new ArrayList<>();
         List<String> consonnes = new ArrayList<>();
@@ -54,7 +54,7 @@ public class Lettres {
             return "mauvaise entrée";
         }
     }
-    public void JeuLettre1V1(){
+    public static void JeuLettre1V1() throws IOException {
         System.out.println("Bienvenue sur le Mot le plus long");
         List<String> Lettres = new ArrayList<>();
         try {
@@ -92,13 +92,14 @@ public class Lettres {
         extracted(Lettres);
     }
 
-    private void extracted(List<String> Lettres) {
+    private static void extracted(List<String> Lettres) throws IOException {
         System.out.println("Voici la liste des lettres disponibles pour la creation du mot");
         System.out.println(Lettres);
+        Timer.DisplayTimer("Il vous reste", 60);
         System.out.println("Désormais, Joueur 1 veuillez soumettre votre réponse");
-        String rep = Main.sc.nextLine();
+        String rep = Player.getPlayerAnswer(30);
         System.out.println("Désormais, Joueur 2 veuillez soumettre votre réponse");
-        String rep1 = Main.sc.nextLine();
+        String rep1 = Player.getPlayerAnswer(30);
 
 
         if (rep.length() > rep1.length()){

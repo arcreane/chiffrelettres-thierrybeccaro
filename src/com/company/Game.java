@@ -1,13 +1,15 @@
 package com.company;
 
 
+import java.io.IOException;
 
 public class Game {
 public static boolean badAnswer;
-    public static void round(){
+    public static void round(String vs) throws IOException {
+
         // 3 rounds are planned
         int round = 0;
-        while(round++ < 3 && badAnswer==false ){
+        while(round++ < 3 && !badAnswer){
             // To jump to following iteration when player doesn't answer within 30s.
             badAnswer = false;
             int randInt = (int)(Math.random() * 2);
@@ -15,8 +17,11 @@ public static boolean badAnswer;
                 sayGameType("lettres");
 
                 // Déroulé du jeu des Lettres
-                System.out.println("Déroulé du jeu des Lettres");
-
+                if(vs.equals("1V1")){
+                    Lettres.JeuLettre1V1();
+                } else{
+                    System.out.println("Jeu des Lettres 1 Vs IA");
+                }
                 // Puis déroulé du jeu des Chiffres
                 System.out.println("Déroulé du jeu des Chiffres");
 
