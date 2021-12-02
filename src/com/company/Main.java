@@ -1,9 +1,7 @@
 package com.company;
 
 import java.io.IOException;
-import java.util.InputMismatchException;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
 
@@ -37,13 +35,16 @@ public class Main {
     }
 
     public static void main(String[] args) {
-//        try{
-            Lettres test = new Lettres();
-//            test.getDICO();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-        test.JeuLettre1V1();
-//        DisplayMenu();
+//        Player Test = new Player("Test");
+//        Player Bot = new Player("Bot");
+//        Chiffres.nbrSelectVsComputer(Test,Bot);
+        List test = new ArrayList();
+        test.add(7);
+        test.add(100);
+        test.add(50);
+        test.add(75);
+        test.add(3);
+        test.add(25);
+        AlgoChiffre.getPairs(test);
     }
 }
