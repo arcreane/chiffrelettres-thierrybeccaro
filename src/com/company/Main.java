@@ -2,13 +2,13 @@ package com.company;
 
 import java.io.IOException;
 import java.util.InputMismatchException;
-import java.util.Random;
 import java.util.Scanner;
+import java.util.random.RandomGenerator;
 
 public class Main {
 
     public static Scanner sc = new Scanner(System.in);
-    public static Random random = new Random();
+    public static RandomGenerator random;
 
     public static void DisplayMenu(){
         System.out.println("Bienvenue sur notre super jeu ^^");
@@ -33,17 +33,11 @@ public class Main {
                 sc.nextLine();
             }
         }
+
     }
 
-    public static void main(String[] args) {
-//        try{
-Lettres test = new Lettres();
-//            test.getDICO();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-        test.JeuLettre1V1();
-        //        DisplayMenu();
+    public static void main(String[] args) throws IOException {
 
+        //DisplayMenu();
     }
 }
