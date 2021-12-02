@@ -1,6 +1,8 @@
 package com.company;
 
 public class Highscores {
+
+
     static String[][] scoresBoard = new String[0][0];
 
     public static void display_High_Scores() {
