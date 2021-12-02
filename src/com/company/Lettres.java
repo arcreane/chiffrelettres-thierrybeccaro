@@ -6,8 +6,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.TreeMap;
 
@@ -33,7 +31,6 @@ public class Lettres {
     }
 
     public static String getLettre(String choixJoueur){
-        String lettre= null;
         List<String> voyelles = new ArrayList<>();
         List<String> consonnes = new ArrayList<>();
 
@@ -61,7 +58,6 @@ public class Lettres {
         Main.clearScreen();
         System.out.println("Bienvenue sur le Mot le plus long");
         List<String> Lettres = new ArrayList<>();
-        List<String> build = new ArrayList<>();
         try {
             getDICO();
         } catch (IOException e) {
@@ -93,11 +89,10 @@ public class Lettres {
                 System.out.println("Vous avez obtenu la lettre: " + value);
             }
         }
-            algorythmeLettre(Lettres, dico);
-        String mot = motLePlusLong(motPossible);
-        System.out.println(mot);
-
         extracted(Lettres);
+        algorythmeLettre(Lettres, dico);
+        String mot = motLePlusLong(motPossible);
+        System.out.println("voici le plus long mot qui était possible: " + mot);
     }
 
     private static void extracted(List<String> Lettres) throws IOException {
@@ -112,49 +107,68 @@ public class Lettres {
 
 
         if (rep.length() > rep1.length()){
-            if (dico.contains(rep)){
-                System.out.println("Bravo joueur 1, vous avez donné le mot le plus long");
-            }
-            else{
-                System.out.println("Joueur 1 votre mot n'existe pas !");
-                if (dico.contains(rep1)){
-                    System.out.println("Bravo joueur 2, vous avez donné le mot le plus long");
+            if(verifMot(rep, Lettres)){
+                if (dico.contains(rep)){
+                    System.out.println("Bravo joueur 1, vous avez donné le mot le plus long");
                 }
                 else{
-                    System.out.println("Joueur 2 votre mot n'existe pas !");
+                    System.out.println("Joueur 1 votre mot n'existe pas !");
+                    if (dico.contains(rep1)){
+                        System.out.println("Bravo joueur 2, vous avez donné le mot le plus long");
+                    }
+                    else{
+                        System.out.println("Joueur 2 votre mot n'existe pas !");
+                    }
                 }
+            }
+            else{
+                System.out.println("Bah alors Joueur 1, on utilise des lettres non autorisées ? petit coquin va");
             }
         }
         else if (rep1.length() > rep.length()){
-            if (dico.contains(rep1)){
-                System.out.println("Bravo joueur 2, vous avez donné le mot le plus long");
-            }
-            else {
-                System.out.println("Joueur 2 votre mot n'existe pas !");
-                if (dico.contains(rep)) {
-                    System.out.println("Bravo joueur 1, vous avez donné le mot le plus long");
-                } else {
-                    System.out.println("Joueur 1 votre mot n'existe pas !");
+            if (verifMot(rep1, Lettres)){
+                if (dico.contains(rep1)){
+                    System.out.println("Bravo joueur 2, vous avez donné le mot le plus long");
                 }
+                else {
+                    System.out.println("Joueur 2 votre mot n'existe pas !");
+                    if (dico.contains(rep)) {
+                        System.out.println("Bravo joueur 1, vous avez donné le mot le plus long");
+                    } else {
+                        System.out.println("Joueur 1 votre mot n'existe pas !");
+                    }
+                }
+            }
+            else{
+                System.out.println("Bah alors Joueur 2, on utilise des lettres non autorisées ? petit coquin va");
             }
         }
         else if ((rep.length() == rep1.length())){
-            if (dico.contains(rep) && dico.contains(rep1)){
-                System.out.println("Cher joueur c'est une égalité !");
+            if(verifMot(rep, Lettres) && verifMot(rep1, Lettres)){
+                if (dico.contains(rep) && dico.contains(rep1)){
+                    System.out.println("Cher joueur c'est une égalité !");
+                }
+                else if (dico.contains(rep) && !dico.contains(rep1)){
+                    System.out.println("Bravo joueur 1 vous gagnez cette manche, contrairement au joueur 2 votre mot existe !");
+                }
+                else if (dico.contains(rep1) && !dico.contains(rep)){
+                    System.out.println("Bravo joueur 2 vous gagnez cette manche, contrairement au joueur 1 votre mot existe !");
+                }
             }
-            else if (dico.contains(rep) && !dico.contains(rep1)){
-                System.out.println("Bravo joueur 1 vous gagnez cette manche, contrairement au joueur 2 votre mot existe !");
+            else if(verifMot(rep, Lettres) && !verifMot(rep1, Lettres)){
+                System.out.println("le mot de Joueur 2 n'est pas valide car il utilise des lettres non autorisés, par conséquent la victoire revient au joueur 1");
             }
-            else if (dico.contains(rep1) && !dico.contains(rep)){
-                System.out.println("Bravo joueur 2 vous gagnez cette manche, contrairement au joueur 1 votre mot existe !");
+            else if(verifMot(rep1, Lettres) && !verifMot(rep, Lettres)){
+                System.out.println("le mot de Joueur 1 n'est pas valide car il utilise des lettres non autorisés, par conséquent la victoire revient au joueur 2");
             }
+
         }
 
     }
     private static void algorythmeLettre(List<String> lettre, List<String> dico){
       String lettersCombined = String.join("",lettre);
         for (int i = 0; i < dico.size(); i++) {
-            TreeMap<Character, Integer> freq = new TreeMap<Character, Integer>();
+            TreeMap<Character, Integer> freq = new TreeMap<>();
 
             for (int j = 0; j < dico.get(i).length(); j++){
                 freq.put(dico.get(i).charAt(j), 0);
@@ -186,6 +200,26 @@ public class Lettres {
             }
         }
         return word;
+    }
+
+    public boolean verifMot(String mot, List<String> lettres){
+        boolean verif = false;
+
+        String word = mot;
+        String lettersCombined = String.join("",lettres);
+        for (int i = 0; i < lettres.size(); i++) {
+            char lettre = lettersCombined.charAt(i);
+            for (int j = 0; j < mot.length(); j++) {
+                if (lettre == mot.charAt(j)){
+                    String letter = String.valueOf(mot.charAt(j));
+                    word = word.replace(letter, "");
+                }
+            }
+        }
+        if (word.equals("")){
+            verif = true;
+        }
+        return verif;
     }
 }
 
