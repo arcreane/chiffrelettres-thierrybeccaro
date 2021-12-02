@@ -54,8 +54,12 @@ public class Game {
         //Faux gagant
         String winner = "Titi";
         System.out.printf("********* Et le gagnant est : %s *********\n", winner);
+        if(vs.equals("1V1")) {
+            Highscores.writeNamesAndScores(StartGame.Player1, StartGame.Player2);
+        }else{
+            Highscores.writeNamesAndScores(StartGame.Player1, StartGame.computer);
+        }
         Highscores.displayHighScores();
-        waitAWhile(3);
     }
 
     private static void sayGameType(String roundType){

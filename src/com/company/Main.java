@@ -1,6 +1,7 @@
 package com.company;
 
 import java.io.IOException;
+import java.util.Hashtable;
 import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
@@ -11,13 +12,14 @@ public class Main {
     public static Scanner sc = new Scanner(System.in);
     public static Random random = new Random();
 
-    public static void DisplayMenu(){
+    public static void DisplayMenu() throws IOException {
         System.out.println("Bienvenue sur notre super jeu! ^^");
         Scanner sc = new Scanner(System.in);
-
+        //Get saved Scores
+        Highscores.getSavedScore("CLScores.txt");
         boolean repeat = true;
         while (repeat){
-            Game.waitAWhile(2);
+            Game.waitAWhile(1);
             clearScreen();
             try{
 
@@ -51,7 +53,7 @@ public class Main {
     }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         DisplayMenu();
     }
