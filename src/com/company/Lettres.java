@@ -14,7 +14,7 @@ import java.util.TreeMap;
 
 public class Lettres {
     static List<String> dico = new ArrayList<>();
-    List<String> motPossible = new ArrayList<>();
+    static List<String> motPossible = new ArrayList<>();
 
     public static void getDICO() throws IOException {
         BufferedReader lecteurAvecBuffer = null;
@@ -32,7 +32,7 @@ public class Lettres {
         lecteurAvecBuffer.close();
     }
 
-    public String getLettre(String choixJoueur){
+    public static String getLettre(String choixJoueur){
         String lettre= null;
         List<String> voyelles = new ArrayList<>();
         List<String> consonnes = new ArrayList<>();
@@ -97,7 +97,7 @@ public class Lettres {
         String mot = motLePlusLong(motPossible);
         System.out.println(mot);
 
-//        extracted(Lettres);
+        extracted(Lettres);
     }
 
     private static void extracted(List<String> Lettres) throws IOException {
@@ -151,7 +151,7 @@ public class Lettres {
         }
 
     }
-    private void algorythmeLettre(List<String> lettre,List<String> dico){
+    private static void algorythmeLettre(List<String> lettre, List<String> dico){
       String lettersCombined = String.join("",lettre);
         for (int i = 0; i < dico.size(); i++) {
             TreeMap<Character, Integer> freq = new TreeMap<Character, Integer>();
@@ -178,7 +178,7 @@ public class Lettres {
             }
         }
     }
-    public String motLePlusLong(List<String> motPossible) {
+    public static String motLePlusLong(List<String> motPossible) {
         String word = "";
         for (String mot: motPossible) {
             if (mot.length() <= 10 && mot.length() > word.length()){

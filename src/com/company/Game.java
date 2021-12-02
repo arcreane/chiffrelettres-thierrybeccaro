@@ -33,11 +33,11 @@ public static boolean badAnswer;
                 sayGameType("chiffres");
 
                 if(vs.equals("1V1")){
-                    System.out.println("Jeu des Lettres 1 Vs 1");
+                    System.out.println("Jeu des Chiffres 1 Vs 1");
                     // Puis déroulé du jeu des Chiffres
-                    System.out.println("Déroulé du jeu des Chiffres");
-                } else{
                     Lettres.JeuLettre1V1();
+                } else{
+                    System.out.println("Jeu des Lettres 1 Vs IA");
                     // Puis déroulé du jeu des Chiffres
                     System.out.println("Déroulé du jeu des Chiffres");
                 }
