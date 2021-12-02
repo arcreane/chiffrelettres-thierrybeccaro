@@ -21,17 +21,15 @@ public class Game {
             if(randInt == 0){
                 sayGameType("lettres");
 
-                // Déroulé du jeu des Lettres
                 if(vs.equals("1V1")){
                     Lettres.JeuLettre1V1();
+                    // Puis déroulé du jeu des Chiffres
                     Chiffres.nbrSelect(StartGame.Player1, StartGame.Player2);
                 } else{
-                    System.out.println("Jeu des Lettres 1 Vs IA");
-                    Lettres.JeuLettre1vsIA();
-                    System.out.println("Déroulé du jeu des Chiffres");
-                }
-                // Puis déroulé du jeu des Chiffres
                     Chiffres.nbrSelectVsComputer(StartGame.Player2, StartGame.computer);
+                    // Puis déroulé du jeu des Lettres
+                    Lettres.JeuLettre1vsIA();
+                }
 
 
             } else {
@@ -43,9 +41,8 @@ public class Game {
                     Lettres.JeuLettre1V1();
                 } else{
                     Lettres.JeuLettre1vsIA();
-                    Chiffres.nbrSelectVsComputer(StartGame.Player2, StartGame.computer);
                     // Puis déroulé du jeu des Chiffres
-                    System.out.println("Déroulé du jeu des Lettres");
+                    Chiffres.nbrSelectVsComputer(StartGame.Player2, StartGame.computer);
                 }
             }
             //Calcul des scores de chacun à la fin de la manche.
