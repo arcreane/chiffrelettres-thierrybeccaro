@@ -94,6 +94,98 @@ public class Lettres {
         String mot = motLePlusLong(motPossible);
         System.out.println("voici le plus long mot qui était possible: " + mot);
     }
+    public static void JeuLettre1vsIA() throws IOException {
+        Main.clearScreen();
+        System.out.println("Bienvenue sur le Mot le plus long");
+        List<String> Lettres = new ArrayList<>();
+
+        try {
+            getDICO();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        for (int i = 0; i < 5; i++) {
+            System.out.println("Joueur 1 voulez vous une consonne ou une voyelle ?");
+            String rep = Main.sc.nextLine();
+            String value = getLettre(rep);
+            if (value.equals("mauvaise entrée")){
+                i--;
+                System.out.println("Veuillez marquer C ou V");
+                continue;
+            }
+            else{
+                Lettres.add(value);
+                System.out.println("Vous avez obtenu la lettre: " + value);
+            }
+            int rdm = Main.random.nextInt(3);
+            if (rdm == 1){
+                rep = "v";
+                System.out.println("L'ordinateur a pioché une voyelle");
+            }
+            else if (rdm == 2){
+                rep = "c";
+                System.out.println("L'ordinateur a pioché une consonne");
+            }
+            value = getLettre(rep);
+            Lettres.add(value);
+            System.out.println("L'ordinateur a obenu la lettre: " + value);
+        }
+        extracted1(Lettres);
+        String mot = motLePlusLong(motPossible);
+        System.out.println("voici le plus long mot qui était possible: " + mot);
+    }
+
+    private static void extracted1(List<String> Lettres) throws IOException {
+        Main.clearScreen();
+        System.out.println("Voici la liste des lettres disponibles pour la creation du mot");
+        System.out.println(Lettres);
+        Timer.DisplayTimer("Il vous reste", 60);
+        System.out.println("Cher Joueur, veuillez soumettre votre réponse");
+        String rep = Player.getPlayerAnswer(30);
+        algorythmeLettre(Lettres, dico);
+        int rdm = Main.random.nextInt(motPossible.size());
+        String rep1 = motPossible.get(rdm);
+        System.out.println("Voici le mot de l'ordinateur: " + rep1);
+
+        if (rep.length() > rep1.length()){
+            if(verifMot(rep, Lettres)){
+                if (dico.contains(rep)){
+                    System.out.println("Cher Joueur vous avez donné le mot le plus long");
+                }
+                else{
+                    System.out.println("Joueur 1 votre mot n'existe pas !");
+                    if (dico.contains(rep1)){
+                        System.out.println("Dommage cher Joueur votre mot n'existe pas, la victoire reviens donc à l'odinateur");
+                    }
+                }
+            }
+            else{
+                System.out.println("Bah alors Joueur 1, on utilise des lettres non autorisées ? petit coquin va");
+            }
+        }
+        else if (rep1.length() > rep.length()){
+            if (verifMot(rep1, Lettres)){
+                if (dico.contains(rep1)){
+                    System.out.println("Dommage cher Joueur, c'est l'ordinateur qui remporte la victoire");
+                }
+            }
+        }
+        else if ((rep.length() == rep1.length())){
+            if(verifMot(rep, Lettres) && verifMot(rep1, Lettres)){
+                if (dico.contains(rep) && dico.contains(rep1)){
+                    System.out.println("Cher Joueur c'est une égalité !");
+                }
+                else if (dico.contains(rep1) && !dico.contains(rep)){
+                    System.out.println("Dommage cher Joueur, votre mot n'existe pas la victoire revient donc à l'ordinateur");
+                }
+            }
+            else if(verifMot(rep1, Lettres) && !verifMot(rep, Lettres)){
+                System.out.println("le mot de Joueur 1 n'est pas valide car il utilise des lettres non autorisés, par conséquent la victoire revient au joueur 2");
+            }
+
+        }
+    }
 
     private static void extracted(List<String> Lettres) throws IOException {
         Main.clearScreen();
