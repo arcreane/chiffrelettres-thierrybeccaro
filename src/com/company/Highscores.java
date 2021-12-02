@@ -1,7 +1,7 @@
 package com.company;
 
 public class Highscores {
-    static String[][] scoresBoard = new String[][];
+    static String[][] scoresBoard = new String[0][0];
 
     public static void display_High_Scores() {
         String level = "";
@@ -11,8 +11,7 @@ public class Highscores {
     }
 
     public static void print_Scores(int index, String level){
-        System.out.println("-----"+level+" Level -----");
         for (int i = index; i < index+5; i++)
-            System.out.println("Name: " + scoresBoard[i][0] + " " + scoresBoard[i][1]);
+            System.out.println("Names: " + scoresBoard[i][0] + " " + scoresBoard[i][1]);
     }
 }
