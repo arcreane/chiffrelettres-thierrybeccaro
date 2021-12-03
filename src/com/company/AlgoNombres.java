@@ -5,6 +5,11 @@ import java.util.List;
 
 public class AlgoNombres {
 
+    static StringBuilder resolveLogic1 = new StringBuilder();
+    static StringBuilder resolveLogic2 = new StringBuilder();
+    static StringBuilder resolveLogic3 = new StringBuilder();
+    static StringBuilder resolveLogic4 = new StringBuilder();
+
 //    protected static int getResult(List<Integer> myList, int target){
 //        //on clone la liste
 //        List<Integer> myListClone = myList.stream().collect(Collectors.toList());
@@ -49,6 +54,7 @@ public class AlgoNombres {
                 finalresult = k;
             }
         }
+
         return finalresult;
     }
 
@@ -59,11 +65,19 @@ public class AlgoNombres {
 
 
     private static int Sum(int x, int y) {
+        /**
+         * Addstwo ints
+         * return result
+         */
         int sum = x + y;
         return sum;
     }
 
     private static int Substract(int x, int y) {
+        /**
+         * Substract two intergers
+         * return result
+         */
         int sub = 0;
         if (x > y) {
             sub = x - y;
@@ -92,8 +106,13 @@ public class AlgoNombres {
 
 
     private static List<Integer> findFirstPairResult(List<Integer> startList) {
+        /**
+         * Gets All different pairs possbile in a list and calculates a result for every pair for every operation;
+         * returns a new list of all pair result
+         */
         List<IntPair> pairList = AlgoChiffre.getPairs(startList);
         List<Integer> output = new ArrayList<>();
+
 
         for (IntPair nbr : pairList) {
             int sum = AlgoNombres.Sum(nbr.x, nbr.y);
@@ -110,6 +129,10 @@ public class AlgoNombres {
     }
 
     private static List<Integer> findAllResult(List<Integer> startList, List<Integer> outputlist) {
+        /**
+         * Finds All combination of operations between numbers of two list
+         * returns a new output list
+         */
         List<Integer> resultOutput = new ArrayList<>();
         for (int j = 0; j < startList.size(); j++) {//on effectue les opérations pour tous les nombres de la nouvelles listes avec les nombres de la première liste
             for (int k = 0; k < outputlist.size(); k++) {
@@ -131,6 +154,11 @@ public class AlgoNombres {
     }
 
     protected static void findAllSolutions(List<Integer> startList, int target) {
+        /**
+         * finds all Possible result of basic Operations from numbers of a list
+         * and checks if a number matchs the target;
+         * if it matches it (or at least should) print the result and the operations used to find
+         */
         int i = 0;
         List<Integer> firstPairsResultList = findFirstPairResult(startList);//on choppe les premières paires
         while (i < 5) {
@@ -138,14 +166,50 @@ public class AlgoNombres {
             firstPairsResultList = findAllResult(startList, firstPairsResultList);
             int checker = targetCheck(firstPairsResultList, target);
             if (checker != 0) {
-
                 System.out.println("résultat trouvé");
                 break;
             }
             if(i == 5){
                 System.out.println("Impossible de trouver le résultat");
+                System.out.println("Recherche de la valeur la plus proche");
+                int closest = getApproxValue(firstPairsResultList,target);
+                if(closest != 0){
+                    System.out.println("la valeur la plus proche est " + closest);
+                }else{
+                    System.out.println("pas de chance il était impossible de trouver le résultat avec " + startList);
+                }
             }
         }
+    }
+
+    private static int getApproxValue(List<Integer> list , int target){
+        for( int nbr : list){
+            if(nbr == target + 1 || nbr == target - 1){
+                return nbr;
+            }else if(nbr == target + 2 || nbr == target - 2){
+                return nbr;
+            }else if(nbr == target + 3 || nbr == target - 3){
+                return nbr;
+            }else if(nbr == target + 4 || nbr == target - 4){
+                return nbr;
+            }else if(nbr == target + 5 || nbr == target - 5){
+                return nbr;
+            }else if(nbr == target + 6 || nbr == target - 6){
+                return nbr;
+            }else if(nbr == target + 7 || nbr == target - 7){
+                return nbr;
+            }else if(nbr == target + 8 || nbr == target - 8){
+                return nbr;
+            }else if(nbr == target + 9 || nbr == target - 9){
+                return nbr;
+            }else if(nbr == target + 10 || nbr == target - 10){
+                return nbr;
+            }else{
+                nbr = 0;
+            }
+        }
+        int nbr=0;
+        return nbr;
     }
 
 }

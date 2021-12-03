@@ -1,10 +1,7 @@
 package com.company;
 
 import java.io.IOException;
-import java.util.Hashtable;
-import java.util.InputMismatchException;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 
 public class Main {
@@ -54,8 +51,17 @@ public class Main {
 
 
     public static void main(String[] args) throws IOException {
+//        DisplayMenu();
+        List test = new ArrayList<>();
+        test.add(5);
+        test.add(2);
+        test.add(25);
+        test.add(50);
+        test.add(75);
+        test.add(100);
+        int target = random.nextInt(101,999);
+        AlgoNombres.findAllSolutions(test,target);
 
-        DisplayMenu();
     }
 
 
