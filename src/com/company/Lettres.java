@@ -5,9 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.TreeMap;
+import java.util.*;
 
 
 public class Lettres {
@@ -91,10 +89,10 @@ public class Lettres {
         }
         extracted(Lettres);
         algorythmeLettre(Lettres, dico);
-        String mot = motLePlusLong(motPossible);
+        String mot = motLePlusLong(motPossible, Lettres);
         System.out.println("voici le plus long mot qui était possible: " + mot);
     }
-    public static void JeuLettre1vsIA() throws IOException {
+    public static void JeuLettre1vsIA(Player player) throws IOException {
         Main.clearScreen();
         System.out.println("Bienvenue sur le Mot le plus long");
         List<String> Lettres = new ArrayList<>();
@@ -106,7 +104,7 @@ public class Lettres {
         }
 
         for (int i = 0; i < 5; i++) {
-            System.out.println("Joueur 1 voulez vous une consonne ou une voyelle ?");
+            System.out.println(player.name + " voulez vous une consonne ou une voyelle ?");
             String rep = Main.sc.nextLine();
             String value = getLettre(rep);
             if (value.equals("mauvaise entrée")){
@@ -131,17 +129,17 @@ public class Lettres {
             Lettres.add(value);
             System.out.println("L'ordinateur a obenu la lettre: " + value);
         }
-        extracted1(Lettres);
-        String mot = motLePlusLong(motPossible);
+        extracted1(Lettres, player);
+        String mot = motLePlusLong(motPossible, Lettres);
         System.out.println("voici le plus long mot qui était possible: " + mot);
     }
 
-    private static void extracted1(List<String> Lettres) throws IOException {
+    private static void extracted1(List<String> Lettres, Player player) throws IOException {
         Main.clearScreen();
         System.out.println("Voici la liste des lettres disponibles pour la creation du mot");
         System.out.println(Lettres);
         Timer.DisplayTimer("Il vous reste", 60);
-        System.out.println("Cher Joueur, veuillez soumettre votre réponse");
+        System.out.println(player.name + " , veuillez soumettre votre réponse");
         String rep = Player.getPlayerAnswer(30);
         algorythmeLettre(Lettres, dico);
         int rdm = Main.random.nextInt(motPossible.size());
@@ -259,6 +257,7 @@ public class Lettres {
     }
     private static void algorythmeLettre(List<String> lettre, List<String> dico){
       String lettersCombined = String.join("",lettre);
+      boolean wordValid = true;
         for (int i = 0; i < dico.size(); i++) {
             TreeMap<Character, Integer> freq = new TreeMap<>();
 
@@ -284,21 +283,46 @@ public class Lettres {
             }
         }
     }
-    public static String motLePlusLong(List<String> motPossible) {
-        String word = "";
-        for (String mot: motPossible) {
-            if (mot.length() <= 10 && mot.length() > word.length()){
-                word = mot;
+    public static String motLePlusLong(List<String> motPossible,List<String> lettres) {
+
+        String wordRef = "";
+
+        for (String mot : dico){
+            boolean wordIsValid = true;
+            ArrayList<String> cloneLetters = new ArrayList<>();
+            for (int k = 0; k < lettres.size(); k++){
+                cloneLetters.add(lettres.get(k));
+            }
+            String[] wordSplit = mot.split("");
+            for (int i = 0; i < mot.length(); i++) {
+                if (wordIsValid) {
+                    for (int j = 0; j < cloneLetters.size(); j++) {
+                        if (Objects.equals(wordSplit[i], cloneLetters.get(j))) {
+                            wordIsValid = true;
+                            cloneLetters.remove(j);
+                            break;
+                        } else {
+                            wordIsValid = false;
+                        }
+                    }
+                }
+            }
+            if(wordIsValid && mot.length() <= 10 && mot.length() > wordRef.length()){
+                wordRef = mot;
+            }
+            else{
+                motPossible.remove(mot);
             }
         }
-        return word;
+        return wordRef;
+
     }
 
     public static boolean verifMot(String mot, List<String> lettres){
         boolean verif = false;
-
         String word = mot;
         String lettersCombined = String.join("",lettres);
+
         for (int i = 0; i < lettres.size(); i++) {
             char lettre = lettersCombined.charAt(i);
             for (int j = 0; j < mot.length(); j++) {
@@ -313,5 +337,6 @@ public class Lettres {
         }
         return verif;
     }
+
 }
 

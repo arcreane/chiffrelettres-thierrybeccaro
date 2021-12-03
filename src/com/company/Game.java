@@ -24,7 +24,7 @@ public static boolean badAnswer;
                     Lettres.JeuLettre1V1();
                     System.out.println("Déroulé du jeu des Chiffres");
                 } else{
-                    Lettres.JeuLettre1vsIA();
+                    Lettres.JeuLettre1vsIA(StartGame.Player);
                     System.out.println("Déroulé du jeu des Chiffres");
                 }
                 // Puis déroulé du jeu des Chiffres
@@ -37,7 +37,7 @@ public static boolean badAnswer;
                     // Puis déroulé du jeu des Chiffres
                     Lettres.JeuLettre1V1();
                 } else{
-                    Lettres.JeuLettre1vsIA();
+                    Lettres.JeuLettre1vsIA(StartGame.Player);
                     // Puis déroulé du jeu des Chiffres
                     System.out.println("Déroulé du jeu des Chiffres");
                 }
