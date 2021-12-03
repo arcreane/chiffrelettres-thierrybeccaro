@@ -12,8 +12,8 @@ public class Player {
         this.name = name;
     }
 
-    public void setScore(int score){
-        this.score += score;
+    public void setScoreLettre (String playerWord){
+        this.score += playerWord.length();
     }
 
     public int getScore(){

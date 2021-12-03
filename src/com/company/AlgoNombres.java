@@ -58,7 +58,7 @@ public class AlgoNombres {
         return finalresult;
     }
 
-    private static int randomNbr(int min, int max) {
+    protected static int randomNbr(int min, int max) {
         int rand = Main.random.nextInt(min, max);
         return rand;
     }
@@ -153,7 +153,7 @@ public class AlgoNombres {
         return resultOutput;
     }
 
-    protected static void findAllSolutions(List<Integer> startList, int target) {
+    protected static int findAllSolutions(List<Integer> startList, int target) {
         /**
          * finds all Possible result of basic Operations from numbers of a list
          * and checks if a number matchs the target;
@@ -166,20 +166,23 @@ public class AlgoNombres {
             firstPairsResultList = findAllResult(startList, firstPairsResultList);
             int checker = targetCheck(firstPairsResultList, target);
             if (checker != 0) {
-                System.out.println("résultat trouvé");
-                break;
+                System.out.println("Le Compte Est Bon !");
+                return target;
             }
             if(i == 5){
                 System.out.println("Impossible de trouver le résultat");
                 System.out.println("Recherche de la valeur la plus proche");
                 int closest = getApproxValue(firstPairsResultList,target);
+
                 if(closest != 0){
                     System.out.println("la valeur la plus proche est " + closest);
+                    return closest;
                 }else{
-                    System.out.println("pas de chance il était impossible de trouver le résultat avec " + startList);
+                    System.out.println("pas de chance il était impossible de trouver " + target + " avec " + startList);
                 }
             }
         }
+        return target;
     }
 
     private static int getApproxValue(List<Integer> list , int target){

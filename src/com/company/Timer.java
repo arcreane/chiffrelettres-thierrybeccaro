@@ -11,7 +11,6 @@ public class Timer {
      */
 
     public static int DisplayTimer(String label, int time){
-        System.out.println("Debut");
         for (int i = time; i >= 0; i--) {
             try {
                 Thread.sleep(1000);

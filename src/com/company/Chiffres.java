@@ -44,17 +44,12 @@ public class Chiffres {
         int max = list.size()-1;
         int i=0;
         int result = 0;
-        while(i < 4){
+        while(i < 1){
             int index = Main.random.nextInt(max - min) + min;
             if(list.get(index) != null){
                 result = list.get(index);
                 list.set(index, null);
                 break;
-            }else if(i == 4){
-                result = Main.random.nextInt(1,10);
-            }
-            else{
-                i++;
             }
         }
         System.out.println(result);
@@ -81,6 +76,7 @@ public class Chiffres {
             case 3 -> getNumber(rang3, result);
         }
     }
+
     protected static void answerCheck(String answer,int target){
         int playeranswer = Integer.parseInt(answer);
         if (playeranswer == target){
@@ -89,7 +85,6 @@ public class Chiffres {
             System.out.println("oulà le compte est pas bon mon pote");
         }
     }
-
 
 
 }

@@ -1,16 +1,28 @@
 package com.company;
 
 import java.io.IOException;
-import java.util.*;
+//import java.util.Hashtable;
+import java.util.InputMismatchException;
+import java.util.Random;
+import java.util.Scanner;
 
 
 public class Main {
 
     public static Scanner sc = new Scanner(System.in);
     public static Random random = new Random();
+    public static ASCIIArtGenerator artGen = new ASCIIArtGenerator();
 
-    public static void DisplayMenu() throws IOException {
-        System.out.println("Bienvenue sur notre super jeu! ^^");
+    public static void DisplayMenu() throws Exception {
+        System.out.println();
+        artGen.printTextArt("Bienvenue",
+                ASCIIArtGenerator.ART_SIZE_MEDIUM,
+                ASCIIArtGenerator.ASCIIArtFont.ART_FONT_SANS_SERIF,
+                "░");
+        System.out.println();
+        System.out.println("sur notre super jeu! ^^");
+        Game.waitAWhile(2);
+
         Scanner sc = new Scanner(System.in);
         //Get saved Scores
         Highscores.getSavedScore("CLScores.txt");
@@ -38,7 +50,12 @@ public class Main {
             }
         }
 
-        System.out.println("Bye bye!");
+        System.out.println();
+        artGen.printTextArt("Au revoir !",
+                ASCIIArtGenerator.ART_SIZE_MEDIUM,
+                ASCIIArtGenerator.ASCIIArtFont.ART_FONT_SANS_SERIF,
+                "░");
+        System.out.println();
 
     }
 
@@ -47,21 +64,13 @@ public class Main {
      */
     public static void clearScreen() {
         System.out.print("\033[H\033[2J");
+        System.out.flush();
     }
 
 
-    public static void main(String[] args) throws IOException {
-//        DisplayMenu();
-        List test = new ArrayList<>();
-        test.add(5);
-        test.add(2);
-        test.add(25);
-        test.add(50);
-        test.add(75);
-        test.add(100);
-        int target = random.nextInt(101,999);
-        AlgoNombres.findAllSolutions(test,target);
+    public static void main(String[] args) throws Exception {
 
+        DisplayMenu();
     }
 
 
