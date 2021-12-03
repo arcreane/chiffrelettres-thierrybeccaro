@@ -52,7 +52,7 @@ public class AlgoNombres {
         return finalresult;
     }
 
-    private static int randomNbr(int min, int max) {
+    protected static int randomNbr(int min, int max) {
         int rand = Main.random.nextInt(min, max);
         return rand;
     }

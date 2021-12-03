@@ -2,19 +2,21 @@ package com.company;
 
 
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Game {
 
     public static boolean badAnswer;
 
-    public static void round(String vs) throws IOException {
+    public static void round(String vs) throws Exception {
 
         // 3 rounds are planned
         int round = 0;
         while(round++ < 3 && !badAnswer){
             waitAWhile(2);
             Main.clearScreen();
-            System.out.printf("MANCHE %d\n", round);
+            System.out.printf("MANCHE %d\n\n", round);
             // To jump to following iteration when player doesn't answer within 30s.
             badAnswer = false;
             int randInt = (int)(Math.random() * 2);
@@ -23,10 +25,10 @@ public class Game {
 
                 if(vs.equals("1V1")){
                     Lettres.JeuLettre1V1(StartGame.Player1,StartGame.Player2);
-                    Chiffres.nbrSelect(StartGame.Player1, StartGame.Player2);
+                    nbreGame(Chiffres.nbrSelect(StartGame.Player1, StartGame.Player2), "1V1");
                 } else{
                     Lettres.JeuLettre1vsIA(StartGame.Player,StartGame.computer);
-                    System.out.println("Déroulé du jeu des Chiffres");
+                    nbreGame(Chiffres.nbrSelectVsComputer(StartGame.Player, StartGame.computer), "1Via");
                 }
 
 
@@ -34,17 +36,14 @@ public class Game {
                 sayGameType("chiffres");
 
                 if(vs.equals("1V1")){
-                    Chiffres.nbrSelect(StartGame.Player1, StartGame.Player2);
-                    // Puis déroulé du jeu des Lettres
+                    nbreGame(Chiffres.nbrSelect(StartGame.Player1, StartGame.Player2), "1V1");
                     Lettres.JeuLettre1V1(StartGame.Player1,StartGame.Player2);
                 } else{
-                    Chiffres.nbrSelectVsComputer(StartGame.Player2, StartGame.computer);
+                    nbreGame(Chiffres.nbrSelectVsComputer(StartGame.Player, StartGame.computer), "1Via");
                     Lettres.JeuLettre1vsIA(StartGame.Player, StartGame.computer);
                 }
             }
-            //Calcul des scores de chacun à la fin de la manche.
-
-            System.out.println("Calcul des scores de chacun à la fin de la manche.");
+            //Calculation of scores for each game.
         }
         //Display of the winner and their Scores
         waitAWhile(2);
@@ -95,5 +94,34 @@ public class Game {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    private static void nbreGame(List list, String mode) throws Exception {
+        String text = (String) list.stream().map(String::valueOf)
+                .collect(Collectors.joining(" "));
+        System.out.println();
+        Main.artGen.printTextArt(text,
+                ASCIIArtGenerator.ART_SIZE_MEDIUM,
+                ASCIIArtGenerator.ASCIIArtFont.ART_FONT_SANS_SERIF,
+                "░");
+        System.out.println();
+    //Display target number
+
+        int target = AlgoNombres.randomNbr(101, 999);
+        String targetText = String.valueOf(target);
+        System.out.println();
+        Main.artGen.printTextArt(targetText,
+                ASCIIArtGenerator.ART_SIZE_MEDIUM,
+                ASCIIArtGenerator.ASCIIArtFont.ART_FONT_SANS_SERIF,
+                "░");
+        System.out.println();
+
+        Timer.DisplayTimer("Il vous reste : ", 60);
+        //Get answers
+        if(mode.equals("1V1")){
+            String answP1 = Player.getPlayerAnswer(30);
+            String answP2 = Player.getPlayerAnswer(30);
+        }
+
     }
 }

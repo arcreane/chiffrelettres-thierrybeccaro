@@ -8,7 +8,7 @@ static Player Player2;
 static Player Player;
 static Player computer;
 
-    public static void playerVsPlayer() throws IOException {
+    public static void playerVsPlayer() throws Exception {
         System.out.println("Bonjour bienvenue sur le mode de jeu 1V1 ");
         System.out.println("Veuillez renseigner le nom du joueur 1");
         String nameP1 = Main.sc.nextLine();
@@ -24,7 +24,7 @@ static Player computer;
 
     }
 
-    public static void playerVsIa() throws IOException {
+    public static void playerVsIa() throws Exception {
         System.out.println("Bonjour bienvenue sur le mode de jeu joueur contre IA ");
         System.out.println("Veuillez renseigner votre nom");
         String nameP = Main.sc.nextLine();

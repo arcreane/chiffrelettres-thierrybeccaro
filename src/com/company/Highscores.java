@@ -20,8 +20,12 @@ public class Highscores {
         scoresBoard.put(key, values);
     }
 
-    public static void displayHighScores() {
-        System.out.println("*************** SCORES **************");
+    public static void displayHighScores() throws Exception {
+        Main.artGen.printTextArt("SCORES",
+                ASCIIArtGenerator.ART_SIZE_MEDIUM,
+                ASCIIArtGenerator.ASCIIArtFont.ART_FONT_SANS_SERIF,
+                "░");
+        System.out.println();
         printScores();
         Game.waitAWhile(5);
     }

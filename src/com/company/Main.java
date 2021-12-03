@@ -11,9 +11,9 @@ public class Main {
 
     public static Scanner sc = new Scanner(System.in);
     public static Random random = new Random();
+    public static ASCIIArtGenerator artGen = new ASCIIArtGenerator();
 
     public static void DisplayMenu() throws Exception {
-        ASCIIArtGenerator artGen = new ASCIIArtGenerator();
         System.out.println();
         artGen.printTextArt("Bienvenue",
                 ASCIIArtGenerator.ART_SIZE_MEDIUM,
