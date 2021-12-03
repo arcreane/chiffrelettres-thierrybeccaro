@@ -97,6 +97,7 @@ public class Game {
     }
 
     private static void nbreGame(List list, String mode) throws Exception {
+        Main.clearScreen();
         String text = (String) list.stream().map(String::valueOf)
                 .collect(Collectors.joining(" "));
         System.out.println();
@@ -105,8 +106,9 @@ public class Game {
                 ASCIIArtGenerator.ASCIIArtFont.ART_FONT_SANS_SERIF,
                 "░");
         System.out.println();
-    //Display target number
 
+        //Display target number
+        System.out.println("Et voici le nombre à trouver :");
         int target = AlgoNombres.randomNbr(101, 999);
         String targetText = String.valueOf(target);
         System.out.println();
@@ -121,6 +123,8 @@ public class Game {
         if(mode.equals("1V1")){
             String answP1 = Player.getPlayerAnswer(30);
             String answP2 = Player.getPlayerAnswer(30);
+        } else {
+            String answP1 = Player.getPlayerAnswer(30);
         }
 
     }

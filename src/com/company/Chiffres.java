@@ -89,5 +89,14 @@ public class Chiffres {
         }
     }
 
+    protected static void answerCheck(String answer,int target){
+        int playeranswer = Integer.parseInt(answer);
+        if (playeranswer == target){
+            System.out.println("vous avez réussi, le compte est bon!");
+        }else{
+            System.out.println("oulà le compte est pas bon mon pote");
+        }
+    }
+
 
 }
