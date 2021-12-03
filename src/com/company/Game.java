@@ -22,13 +22,11 @@ public class Game {
                 sayGameType("lettres");
 
                 if(vs.equals("1V1")){
-                    Lettres.JeuLettre1V1();
-                    // Puis déroulé du jeu des Chiffres
+                    Lettres.JeuLettre1V1(StartGame.Player1,StartGame.Player2);
                     Chiffres.nbrSelect(StartGame.Player1, StartGame.Player2);
                 } else{
-                    Chiffres.nbrSelectVsComputer(StartGame.Player2, StartGame.computer);
-                    // Puis déroulé du jeu des Lettres
-                    Lettres.JeuLettre1vsIA();
+                    Lettres.JeuLettre1vsIA(StartGame.Player,StartGame.computer);
+                    System.out.println("Déroulé du jeu des Chiffres");
                 }
 
 
@@ -38,11 +36,10 @@ public class Game {
                 if(vs.equals("1V1")){
                     Chiffres.nbrSelect(StartGame.Player1, StartGame.Player2);
                     // Puis déroulé du jeu des Lettres
-                    Lettres.JeuLettre1V1();
+                    Lettres.JeuLettre1V1(StartGame.Player1,StartGame.Player2);
                 } else{
-                    Lettres.JeuLettre1vsIA();
-                    // Puis déroulé du jeu des Chiffres
                     Chiffres.nbrSelectVsComputer(StartGame.Player2, StartGame.computer);
+                    Lettres.JeuLettre1vsIA(StartGame.Player, StartGame.computer);
                 }
             }
             //Calcul des scores de chacun à la fin de la manche.
@@ -52,9 +49,34 @@ public class Game {
         //Display of the winner and their Scores
         waitAWhile(2);
         Main.clearScreen();
-        //Faux gagant
-        String winner = "Titi";
-        System.out.printf("********* Et le gagnant est : %s *********\n", winner);
+        String winner = null;
+        if (StartGame.Player1.score > StartGame.Player2.score){
+            winner = StartGame.Player1.name;
+            System.out.printf("********* Et le gagnant est : %s *********\n", winner);
+
+        }
+        else if (StartGame.Player2.score > StartGame.Player1.score){
+            winner = StartGame.Player2.name;
+            System.out.printf("********* Et le gagnant est : %s *********\n", winner);
+
+        }
+        else if (StartGame.Player.score > StartGame.computer.score){
+            winner = StartGame.Player.name;
+            System.out.printf("********* Et le gagnant est : %s *********\n", winner);
+
+        }
+        else if (StartGame.computer.score > StartGame.Player.score){
+            winner = StartGame.computer.name;
+            System.out.printf("********* Et le gagnant est : %s *********\n", winner);
+
+        }
+        else if (StartGame.Player1.score == StartGame.Player2.score){
+            System.out.println("********* Il n'y a pas de gagnant, c'est une égalité");
+        }
+        else if(StartGame.computer.score == StartGame.Player.score){
+            System.out.println("********* Il n'y a pas de gagnant, c'est une égalité");
+        }
+
         if(vs.equals("1V1")) {
             Highscores.writeNamesAndScores(StartGame.Player1, StartGame.Player2);
         }else{
@@ -62,7 +84,6 @@ public class Game {
         }
         Highscores.displayHighScores();
     }
-
 
     private static void sayGameType(String roundType){
         System.out.printf("Nous allons commencer par les %s\n", roundType);

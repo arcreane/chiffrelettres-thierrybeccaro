@@ -3,9 +3,11 @@ package com.company;
 import java.io.IOException;
 
 public class StartGame {
-    static Player Player1;
-    static Player Player2;
-    static Player computer;
+static Player Player1;
+static Player Player2;
+static Player Player;
+static Player computer;
+
     public static void playerVsPlayer() throws IOException {
         System.out.println("Bonjour bienvenue sur le mode de jeu 1V1 ");
         System.out.println("Veuillez renseigner le nom du joueur 1");
@@ -26,8 +28,7 @@ public class StartGame {
         System.out.println("Bonjour bienvenue sur le mode de jeu joueur contre IA ");
         System.out.println("Veuillez renseigner votre nom");
         String nameP = Main.sc.nextLine();
-        computer = new Player("Wall-E");
-        Player1 = new Player(nameP);
+        Player = new Player(nameP);
 
         //Beginning of the Game
         Game.round("1Via");
