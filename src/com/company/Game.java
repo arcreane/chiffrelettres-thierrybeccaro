@@ -23,7 +23,7 @@ public class Game {
 
                 // Déroulé du jeu des Lettres
                 if(vs.equals("1V1")){
-                    Lettres.JeuLettre1V1();
+                    Lettres.JeuLettre1V1(StartGame.Player1,StartGame.Player2);
                     Chiffres.nbrSelect(StartGame.Player1, StartGame.Player2);
                 } else{
                     Lettres.JeuLettre1vsIA(StartGame.Player);
@@ -39,7 +39,7 @@ public class Game {
                 if(vs.equals("1V1")){
                     Chiffres.nbrSelect(StartGame.Player1, StartGame.Player2);
                     // Puis déroulé du jeu des Lettres
-                    Lettres.JeuLettre1V1();
+                    Lettres.JeuLettre1V1(StartGame.Player1,StartGame.Player2);
                 } else{
                     Lettres.JeuLettre1vsIA(StartGame.Player);
                     // Puis déroulé du jeu des Chiffres

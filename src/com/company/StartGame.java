@@ -6,8 +6,8 @@ public class StartGame {
 static Player Player1;
 static Player Player2;
 static Player Player;
+static Player computer;
 
-    static Player computer;
     public static void playerVsPlayer() throws IOException {
         System.out.println("Bonjour bienvenue sur le mode de jeu 1V1 ");
         System.out.println("Veuillez renseigner le nom du joueur 1");

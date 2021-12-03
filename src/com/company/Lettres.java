@@ -52,7 +52,8 @@ public class Lettres {
             return "mauvaise entrée";
         }
     }
-    public static void JeuLettre1V1() throws IOException {
+
+    public static void JeuLettre1V1(Player player1, Player player2) throws IOException {
         Main.clearScreen();
         System.out.println("Bienvenue sur le Mot le plus long");
         List<String> Lettres = new ArrayList<>();
@@ -62,24 +63,25 @@ public class Lettres {
             e.printStackTrace();
         }
         for (int i = 0; i < 5; i++) {
-            System.out.println("Joueur 1 voulez vous une consonne ou une voyelle ?");
+            System.out.println( player1.name + " voulez vous une consonne ou une voyelle ?");
             String rep = Main.sc.nextLine();
             String value = getLettre(rep);
             if (value.equals("mauvaise entrée")){
                 i--;
-                System.out.println("Veuillez marquer C ou V");
+                System.out.println("Veuillez marquer c ou v");
                 continue;
             }
             else{
                 Lettres.add(value);
                 System.out.println("Vous avez obtenu la lettre: " + value);
             }
-            System.out.println("Joueur 2 voulez vous une consonne ou une voyelle ?");
+            System.out.println(player2.name + " voulez vous une consonne ou une voyelle ?");
             rep = Main.sc.nextLine();
             value = getLettre(rep);
             if (value.equals("mauvaise entrée")){
+                Lettres.remove(i);
                 i--;
-                System.out.println("Veuillez marquer C ou V");
+                System.out.println("Veuillez marquer c ou v");
                 continue;
             }
             else{
@@ -87,7 +89,7 @@ public class Lettres {
                 System.out.println("Vous avez obtenu la lettre: " + value);
             }
         }
-        extracted(Lettres);
+        extracted(Lettres,player1,player2);
         algorythmeLettre(Lettres, dico);
         String mot = motLePlusLong(motPossible, Lettres);
         System.out.println("voici le plus long mot qui était possible: " + mot);
@@ -139,7 +141,7 @@ public class Lettres {
         System.out.println("Voici la liste des lettres disponibles pour la creation du mot");
         System.out.println(Lettres);
         Timer.DisplayTimer("Il vous reste", 60);
-        System.out.println(player.name + " , veuillez soumettre votre réponse");
+        System.out.println(player.name + ", veuillez soumettre votre réponse");
         String rep = Player.getPlayerAnswer(30);
         algorythmeLettre(Lettres, dico);
         int rdm = Main.random.nextInt(motPossible.size());
@@ -149,23 +151,23 @@ public class Lettres {
         if (rep.length() > rep1.length()){
             if(verifMot(rep, Lettres)){
                 if (dico.contains(rep)){
-                    System.out.println("Cher Joueur vous avez donné le mot le plus long");
+                    System.out.println("bravo ! " + player.name + " vous avez donné le mot le plus long");
                 }
                 else{
-                    System.out.println("Joueur 1 votre mot n'existe pas !");
+                    System.out.println(player.name + " votre mot n'existe pas !");
                     if (dico.contains(rep1)){
-                        System.out.println("Dommage cher Joueur votre mot n'existe pas, la victoire reviens donc à l'odinateur");
+                        System.out.println("Dommage " + player.name + "votre mot n'existe pas, la victoire reviens donc à l'odinateur");
                     }
                 }
             }
             else{
-                System.out.println("Bah alors Joueur 1, on utilise des lettres non autorisées ? petit coquin va");
+                System.out.println("Bah alors" + player.name +", on utilise des lettres non autorisées ? petit coquin va");
             }
         }
         else if (rep1.length() > rep.length()){
             if (verifMot(rep1, Lettres)){
                 if (dico.contains(rep1)){
-                    System.out.println("Dommage cher Joueur, c'est l'ordinateur qui remporte la victoire");
+                    System.out.println("Dommage " + player.name + ", c'est l'ordinateur qui remporte la victoire");
                 }
             }
         }
@@ -175,62 +177,62 @@ public class Lettres {
                     System.out.println("Cher Joueur c'est une égalité !");
                 }
                 else if (dico.contains(rep1) && !dico.contains(rep)){
-                    System.out.println("Dommage cher Joueur, votre mot n'existe pas la victoire revient donc à l'ordinateur");
+                    System.out.println("Dommage " + player.name + "votre mot n'existe pas la victoire revient donc à l'ordinateur");
                 }
             }
             else if(verifMot(rep1, Lettres) && !verifMot(rep, Lettres)){
-                System.out.println("le mot de Joueur 1 n'est pas valide car il utilise des lettres non autorisés, par conséquent la victoire revient au joueur 2");
+                System.out.println(player.name + "votre mot n'est pas valide car il utilise des lettres non autorisés, par conséquent la victoire revient a l'ordinateur");
             }
 
         }
     }
 
-    private static void extracted(List<String> Lettres) throws IOException {
+    private static void extracted(List<String> Lettres, Player player1, Player player2) throws IOException {
         Main.clearScreen();
         System.out.println("Voici la liste des lettres disponibles pour la creation du mot");
         System.out.println(Lettres);
         Timer.DisplayTimer("Il vous reste", 60);
-        System.out.println("Désormais, Joueur 1 veuillez soumettre votre réponse");
+        System.out.println(player1.name + ", veuillez soumettre votre réponse");
         String rep = Player.getPlayerAnswer(30);
-        System.out.println("Désormais, Joueur 2 veuillez soumettre votre réponse");
+        System.out.println(player2.name + ", veuillez soumettre votre réponse");
         String rep1 = Player.getPlayerAnswer(30);
 
 
         if (rep.length() > rep1.length()){
             if(verifMot(rep, Lettres)){
                 if (dico.contains(rep)){
-                    System.out.println("Bravo joueur 1, vous avez donné le mot le plus long");
+                    System.out.println("bravo ! " + player1.name + " vous avez donné le mot le plus long");
                 }
                 else{
-                    System.out.println("Joueur 1 votre mot n'existe pas !");
+                    System.out.println(player1.name + " votre mot n'existe pas !");
                     if (dico.contains(rep1)){
-                        System.out.println("Bravo joueur 2, vous avez donné le mot le plus long");
+                        System.out.println("bravo ! " + player2.name + " vous avez donné le mot le plus long");
                     }
                     else{
-                        System.out.println("Joueur 2 votre mot n'existe pas !");
+                        System.out.println(player2.name + " votre mot n'existe pas !");
                     }
                 }
             }
             else{
-                System.out.println("Bah alors Joueur 1, on utilise des lettres non autorisées ? petit coquin va");
+                System.out.println("Bah alors" +player1.name + ", on utilise des lettres non autorisées ? petit coquin va");
             }
         }
         else if (rep1.length() > rep.length()){
             if (verifMot(rep1, Lettres)){
                 if (dico.contains(rep1)){
-                    System.out.println("Bravo joueur 2, vous avez donné le mot le plus long");
+                    System.out.println("bravo ! " + player2.name + " vous avez donné le mot le plus long");
                 }
                 else {
-                    System.out.println("Joueur 2 votre mot n'existe pas !");
+                    System.out.println(player2.name + " votre mot n'existe pas !");
                     if (dico.contains(rep)) {
-                        System.out.println("Bravo joueur 1, vous avez donné le mot le plus long");
+                        System.out.println("bravo ! " + player1.name + " vous avez donné le mot le plus long");
                     } else {
-                        System.out.println("Joueur 1 votre mot n'existe pas !");
+                        System.out.println(player1.name + " votre mot n'existe pas !");
                     }
                 }
             }
             else{
-                System.out.println("Bah alors Joueur 2, on utilise des lettres non autorisées ? petit coquin va");
+                System.out.println("Bah alors " + player2.name +", on utilise des lettres non autorisées ? petit coquin va");
             }
         }
         else if ((rep.length() == rep1.length())){
@@ -239,22 +241,23 @@ public class Lettres {
                     System.out.println("Cher joueur c'est une égalité !");
                 }
                 else if (dico.contains(rep) && !dico.contains(rep1)){
-                    System.out.println("Bravo joueur 1 vous gagnez cette manche, contrairement au joueur 2 votre mot existe !");
+                    System.out.println("Bravo " +  player1.name + "vous gagnez cette manche, contrairement à" + player2.name + " votre mot existe !");
                 }
                 else if (dico.contains(rep1) && !dico.contains(rep)){
-                    System.out.println("Bravo joueur 2 vous gagnez cette manche, contrairement au joueur 1 votre mot existe !");
+                    System.out.println("Bravo " +  player2.name + "vous gagnez cette manche, contrairement à" + player2.name + " votre mot existe !");
                 }
             }
             else if(verifMot(rep, Lettres) && !verifMot(rep1, Lettres)){
-                System.out.println("le mot de Joueur 2 n'est pas valide car il utilise des lettres non autorisés, par conséquent la victoire revient au joueur 1");
+                System.out.println("le mot de " + player2.name + "n'est pas valide car il utilise des lettres non autorisés, par conséquent la victoire revient à " + player1.name);
             }
             else if(verifMot(rep1, Lettres) && !verifMot(rep, Lettres)){
-                System.out.println("le mot de Joueur 1 n'est pas valide car il utilise des lettres non autorisés, par conséquent la victoire revient au joueur 2");
+                System.out.println("le mot de " + player1.name + "n'est pas valide car il utilise des lettres non autorisés, par conséquent la victoire revient à " + player2.name);
             }
 
         }
 
     }
+
     private static void algorythmeLettre(List<String> lettre, List<String> dico){
       String lettersCombined = String.join("",lettre);
       boolean wordValid = true;
@@ -283,6 +286,7 @@ public class Lettres {
             }
         }
     }
+
     public static String motLePlusLong(List<String> motPossible,List<String> lettres) {
 
         String wordRef = "";
