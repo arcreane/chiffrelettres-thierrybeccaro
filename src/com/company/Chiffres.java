@@ -31,6 +31,11 @@ public class Chiffres {
          List<Integer> result = new ArrayList();
          int count = 0;
          while(count  < 3){
+             if(rank3.size()== 0){
+                 System.out.println("Le rang 3 est épuisé veuillez en choisir un autre");
+             }else if(rank2.size()== 0){
+                 System.out.println("Le rang  2 est épuisé veuillez en choisir un autre");
+             }
              playerChoice(player,rank1,rank2,rank3,result);
              computerChoice(computer,rank1,rank2,rank3,result);
              count++;
@@ -44,6 +49,7 @@ public class Chiffres {
         int max = list.size()-1;
         int i=0;
         int result = 0;
+
         while(i < 4){
             int index = Main.random.nextInt(max - min) + min;
             if(list.get(index) != null){
@@ -82,7 +88,6 @@ public class Chiffres {
             case 3 -> getNumber(rang3, result);
         }
     }
-
 
 
 }
