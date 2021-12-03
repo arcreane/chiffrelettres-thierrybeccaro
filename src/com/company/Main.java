@@ -1,22 +1,25 @@
 package com.company;
 
 import java.io.IOException;
+import java.util.Hashtable;
 import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
+
 
 public class Main {
 
     public static Scanner sc = new Scanner(System.in);
     public static Random random = new Random();
 
-    public static void DisplayMenu(){
-        System.out.println("Bienvenue sur notre super jeu ^^");
+    public static void DisplayMenu() throws IOException {
+        System.out.println("Bienvenue sur notre super jeu! ^^");
         Scanner sc = new Scanner(System.in);
-
+        //Get saved Scores
+        Highscores.getSavedScore("CLScores.txt");
         boolean repeat = true;
         while (repeat){
-            Game.waitAWhile(2);
+            Game.waitAWhile(1);
             clearScreen();
             try{
 
@@ -26,17 +29,19 @@ public class Main {
 
                     case 1 -> StartGame.playerVsIa();
                     case 2 -> StartGame.playerVsPlayer();
-                    case 3 -> System.out.println("Voici les Scores");
+                    case 3 -> Highscores.displayHighScores();
                     case 4 -> repeat = false;
-                    default -> System.err.println ( "Unrecognized option" );
+                    default -> System.err.println ( "Option non reconnue" );
 
                 }
             }
             catch (InputMismatchException | IOException e){
-                System.err.println("input non valide");
+                System.err.println("Input non valide");
                 sc.nextLine();
             }
         }
+
+        System.out.println("Bye bye!");
 
     }
 
@@ -47,7 +52,9 @@ public class Main {
         System.out.print("\033[H\033[2J");
     }
 
-    public static void main(String[] args) {
+
+    public static void main(String[] args) throws IOException {
+
         DisplayMenu();
     }
 
