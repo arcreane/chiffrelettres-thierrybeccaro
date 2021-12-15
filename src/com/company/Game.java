@@ -1,7 +1,5 @@
 package com.company;
 
-
-import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -122,9 +120,12 @@ public class Game {
         //Get answers
         if(mode.equals("1V1")){
             String answP1 = Player.getPlayerAnswer(30);
+            Chiffres.answerCheck(answP1, target);
             String answP2 = Player.getPlayerAnswer(30);
+            Chiffres.answerCheck(answP2, target);
         } else {
-            String answP1 = Player.getPlayerAnswer(30);
+            String answP = Player.getPlayerAnswer(30);
+            Chiffres.answerCheck(answP, target);
         }
 
     }
