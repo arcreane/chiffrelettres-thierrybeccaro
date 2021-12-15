@@ -19,7 +19,7 @@ public class Chiffres {
             playerChoice(player,rank1,rank2,rank3,result);
             count++;
         }
-        //System.out.println(result);
+        System.out.println(result);
         return result;
 
     }
@@ -31,16 +31,11 @@ public class Chiffres {
          List<Integer> result = new ArrayList();
          int count = 0;
          while(count  < 3){
-             if(rank3.size()== 0){
-                 System.out.println("Le rang 3 est épuisé veuillez en choisir un autre");
-             }else if(rank2.size()== 0){
-                 System.out.println("Le rang  2 est épuisé veuillez en choisir un autre");
-             }
              playerChoice(player,rank1,rank2,rank3,result);
              computerChoice(computer,rank1,rank2,rank3,result);
              count++;
          }
-         //System.out.println(result);
+         System.out.println(result);
          return result;
      }
 
@@ -49,19 +44,12 @@ public class Chiffres {
         int max = list.size()-1;
         int i=0;
         int result = 0;
-
-        while(i < 4){
+        while(i < 1){
             int index = Main.random.nextInt(max - min) + min;
             if(list.get(index) != null){
                 result = list.get(index);
                 list.set(index, null);
                 break;
-            }
-            else if(i == 3){
-                result = Main.random.nextInt(1,10);
-            }
-            else{
-                i++;
             }
         }
         System.out.println(result);

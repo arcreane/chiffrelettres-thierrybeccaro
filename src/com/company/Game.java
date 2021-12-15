@@ -20,7 +20,6 @@ public class Game {
             int randInt = (int)(Math.random() * 2);
             if(randInt == 0){
                 sayGameType("lettres");
-
                 if(vs.equals("1V1")){
                     Lettres.JeuLettre1V1(StartGame.Player1,StartGame.Player2);
                     nbreGame(Chiffres.nbrSelect(StartGame.Player1, StartGame.Player2), "1V1");
@@ -108,6 +107,7 @@ public class Game {
         //Display target number
         System.out.println("Et voici le nombre à trouver :");
         int target = AlgoNombres.randomNbr(101, 999);
+        int solution = AlgoNombres.findAllSolutions(list,target);
         String targetText = String.valueOf(target);
         System.out.println();
         Main.artGen.printTextArt(targetText,

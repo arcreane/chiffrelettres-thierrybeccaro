@@ -62,7 +62,7 @@ public class Lettres {
         }
     }
 
-    public static void JeuLettre1V1(Player player1, Player player2) throws Exception {
+    public static void JeuLettre1V1(Player player1, Player player2) throws IOException {
         /**
          * function that create the game of letter for player vs player
          * argument : the object of the two player
@@ -108,7 +108,7 @@ public class Lettres {
         System.out.println("voici le plus long mot qui était possible: " + mot);
     }
 
-    public static void JeuLettre1vsIA(Player player, Player computer) throws Exception {
+    public static void JeuLettre1vsIA(Player player, Player computer) throws IOException {
         /**
          * function that create the game of letter for player vs computer
          * argument : the object of the two player
@@ -154,7 +154,7 @@ public class Lettres {
         System.out.println("voici le plus long mot qui était possible: " + mot);
     }
 
-    private static void extracted1(List<String> Lettres, Player player, Player computer) throws Exception {
+    private static void extracted1(List<String> Lettres, Player player, Player computer) throws IOException {
         /**
          * function extracted from the player vs computer, it permit to take the input of the player and compare it to the computer
          * arguments : take the list of letters as an argument for verification
