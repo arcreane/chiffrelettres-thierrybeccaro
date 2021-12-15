@@ -21,6 +21,7 @@ public class Highscores {
     }
 
     public static void displayHighScores() throws Exception {
+        Main.clearScreen();
         Main.artGen.printTextArt("SCORES",
                 ASCIIArtGenerator.ART_SIZE_MEDIUM,
                 ASCIIArtGenerator.ASCIIArtFont.ART_FONT_SANS_SERIF,

@@ -62,7 +62,7 @@ public class Lettres {
         }
     }
 
-    public static void JeuLettre1V1(Player player1, Player player2) throws IOException {
+    public static void JeuLettre1V1(Player player1, Player player2) throws Exception {
         /**
          * function that create the game of letter for player vs player
          * argument : the object of the two player
@@ -102,13 +102,13 @@ public class Lettres {
                 System.out.println("Vous avez obtenu la lettre: " + value.toUpperCase());
             }
         }
-        extracted(Lettres,player1,player2);
+        input_user(Lettres,player1,player2);
         algorythmeLettre(Lettres, dico);
         String mot = motLePlusLong(motPossible, Lettres);
         System.out.println("voici le plus long mot qui était possible: " + mot);
     }
 
-    public static void JeuLettre1vsIA(Player player, Player computer) throws IOException {
+    public static void JeuLettre1vsIA(Player player, Player computer) throws Exception {
         /**
          * function that create the game of letter for player vs computer
          * argument : the object of the two player
@@ -154,7 +154,7 @@ public class Lettres {
         System.out.println("voici le plus long mot qui était possible: " + mot);
     }
 
-    private static void extracted1(List<String> Lettres, Player player, Player computer) throws IOException {
+    private static void extracted1(List<String> Lettres, Player player, Player computer) throws Exception {
         /**
          * function extracted from the player vs computer, it permit to take the input of the player and compare it to the computer
          * arguments : take the list of letters as an argument for verification
@@ -225,7 +225,7 @@ public class Lettres {
         }
     }
 
-    private static void extracted(List<String> Lettres, Player player1, Player player2) throws IOException {
+    private static void input_user(List<String> Lettres, Player player1, Player player2) throws Exception {
         /**
          * function extracted from the player vs computer, it permit to take the input of the player and compare it to the computer
          * arguments : take the list of letters as an argument for verification
@@ -252,22 +252,7 @@ public class Lettres {
 
         if (rep.length() > rep1.length()){
             if(verifMot(rep, Lettres)){
-                if (dico.contains(rep)){
-                    System.out.println("Bravo, " + player1.name + " ! Vous avez donné le mot le plus long");
-                    player1.setScoreLettre(rep);
-                    System.out.println("Vous gagnez donc " + rep.length() + " points");
-                }
-                else{
-                    System.out.println(player1.name + ", votre mot n'existe pas !");
-                    if (dico.contains(rep1)){
-                        System.out.println("Bravo, " + player2.name + " ! Vous avez donné le mot le plus long");
-                        player2.setScoreLettre(rep1);
-                        System.out.println("Vous gagnez donc " + rep1.length() + " points");
-                    }
-                    else{
-                        System.out.println(player2.name + ", votre mot n'existe pas !");
-                    }
-                }
+                informPlayer(player1, player2, rep, rep1);
             }
             else{
                 System.out.println("Bah alors, " +player1.name + ", on utilise des lettres non autorisées ? Petit coquin va !");
@@ -275,21 +260,23 @@ public class Lettres {
         }
         else if (rep1.length() > rep.length()){
             if (verifMot(rep1, Lettres)){
-                if (dico.contains(rep1)){
-                    System.out.println("Bravo, " + player2.name + "! Vous avez donné le mot le plus long");
-                    player2.setScoreLettre(rep1);
-                    System.out.println("vous gagnez donc " + rep1.length() + " points");
-                }
-                else {
-                    System.out.println(player2.name + ", votre mot n'existe pas !");
-                    if (dico.contains(rep)) {
-                        System.out.println("Bravo, " + player1.name + "! vous avez donné le mot le plus long");
-                        player1.setScoreLettre(rep);
-                        System.out.println("Vous gagnez donc " + rep.length() + " points");
-                    } else {
-                        System.out.println(player1.name + ", votre mot n'existe pas !");
-                    }
-                }
+                informPlayer(player2, player1, rep1, rep);
+
+//                if (dico.contains(rep1)){
+//                    System.out.println("Bravo, " + player2.name + "! Vous avez donné le mot le plus long");
+//                    player2.setScoreLettre(rep1);
+//                    System.out.println("vous gagnez donc " + rep1.length() + " points");
+//                }
+//                else {
+//                    System.out.println(player2.name + ", votre mot n'existe pas !");
+//                    if (dico.contains(rep)) {
+//                        System.out.println("Bravo, " + player1.name + "! vous avez donné le mot le plus long");
+//                        player1.setScoreLettre(rep);
+//                        System.out.println("Vous gagnez donc " + rep.length() + " points");
+//                    } else {
+//                        System.out.println(player1.name + ", votre mot n'existe pas !");
+//                    }
+//                }
             }
             else{
                 System.out.println("Bah alors, " + player2.name +", on utilise des lettres non autorisées ? Petit coquin va !");
@@ -328,6 +315,31 @@ public class Lettres {
 
         }
 
+    }
+
+    private static void informPlayer(Player player1, Player player2, String rep, String rep1) {
+
+        if (dico.contains(rep)){
+            setPlayerScore(player1, rep);
+        }
+        else{
+            System.out.println(player1.name + ", votre mot n'existe pas !");
+            if (dico.contains(rep1)){
+                setPlayerScore(player2,rep1);
+//                System.out.println("Bravo, " + player2.name + " ! Vous avez donné le mot le plus long");
+//                player2.setScoreLettre(rep1);
+//                System.out.println("Vous gagnez donc " + rep1.length() + " points");
+            }
+            else{
+                System.out.println(player2.name + ", votre mot n'existe pas !");
+            }
+        }
+    }
+
+    private static void setPlayerScore(Player player, String rep) {
+        System.out.println("Bravo, " + player.name + " ! Vous avez donné le mot le plus long");
+        player.setScoreLettre(rep);
+        System.out.println("Vous gagnez donc " + rep.length() + " points");
     }
 
     private static void algorythmeLettre(List<String> lettre, List<String> dico){
